@@ -6,7 +6,7 @@ const { StreetReport, AreaReport } = models;
 
 class StreetReports {
     static async create(req, res) {
-        const { name, report, areaId } = req.body;
+        const { name, report, rating, areaId } = req.body;
 
         try {
             const area = await AreaReport.findOne({
@@ -21,6 +21,7 @@ class StreetReports {
                 defaults: {
                     type: "street",
                     name,
+                    rating,
                     areaId,
                     geolocation: JSON.stringify(value.data),
                     report: JSON.stringify(report)

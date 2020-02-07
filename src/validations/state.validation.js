@@ -24,6 +24,11 @@ export default {
             .exists()
             .withMessage("Report field is required")
             .custom(value => notEmpty(value, "Report cannot be left blank")),
+        check("rating")
+            .trim()
+            .exists()
+            .withMessage("Rating field is required")
+            .custom(value => notEmpty(value, "Rating cannot be left blank")),
     ],
     update: [
         check("name")

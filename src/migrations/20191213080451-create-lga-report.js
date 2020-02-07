@@ -31,6 +31,10 @@ module.exports = {
             type: Sequelize.TEXT,
             allowNull: false
         },
+        rating: {
+            type: Sequelize.FLOAT,
+            allowNull: false
+        },
         createdAt: {
             allowNull: false,
             type: Sequelize.DATE

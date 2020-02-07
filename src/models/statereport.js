@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
+        rating: {
+            type: DataTypes.FLOAT,
+            allowNull: false
+        }
     }, {});
 
     StateReport.associate = models => {

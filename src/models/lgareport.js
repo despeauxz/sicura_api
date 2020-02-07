@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
             geolocation: {
                 type: DataTypes.TEXT,
                 allowNull: false
+            },
+            rating: {
+                type: DataTypes.FLOAT,
+                allowNull: false
             }
         },
         {}

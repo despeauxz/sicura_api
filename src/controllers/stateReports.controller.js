@@ -9,7 +9,7 @@ const { StateReport, LgaReport, AreaReport, StreetReport } = models;
 
 class StateReports {
     static async addState(req, res) {
-        const { name, capital, report } = req.body;
+        const { name, capital, report, rating } = req.body;
 
         try {
             const value = await axios.get(
@@ -21,6 +21,7 @@ class StateReports {
                 defaults: {
                     type: "state",
                     name,
+                    rating,
                     capital,
                     geolocation: JSON.stringify(value.data),
                     report: JSON.stringify(report)
