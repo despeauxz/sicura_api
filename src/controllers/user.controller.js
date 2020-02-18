@@ -70,24 +70,28 @@ class UserController {
     static async login(req, res) {
         const { email, password } = req.body;
 
-        await User.findOne({ where: { email } }).then(async user => {
-            verifyPassword(password, user.dataValues.password).then(verify => {
-                if (!verify) {
-                    response.errorResponse(
-                        res,
-                        401,
-                        "Email/Password does not match"
+        try {
+            await User.findOne({ where: { email } }).then(async user => {
+                verifyPassword(password, user.dataValues.password).then(verify => {
+                    if (!verify) {
+                        response.errorResponse(
+                            res,
+                            401,
+                            "Email/Password does not match"
+                        );
+                    }
+
+                    const token = Authenticate.generateToken(
+                        UserController.tokenObj(user)
                     );
-                }
+                    user = getUserObject(user);
 
-                const token = Authenticate.generateToken(
-                    UserController.tokenObj(user)
-                );
-                user = getUserObject(user);
-
-                response.successResponse(res, 200, { token, user });
+                    response.successResponse(res, 200, { token, user });
+                });
             });
-        });
+        } catch (error) {
+            return response.errorResponse(res, 400, error);
+        }
     }
 
     /**

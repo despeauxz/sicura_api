@@ -24,7 +24,7 @@ class AreaReports {
                     rating,
                     lgaId,
                     geolocation: JSON.stringify(value.data),
-                    report: JSON.stringify(report)
+                    report
                 }
             });
 
@@ -76,11 +76,11 @@ class AreaReports {
     static async remove(req, res) {
         try {
             const { id } = req.params;
-            const res = await AreaReport.findOne({
+            const data = await AreaReport.findOne({
                 where: { id }
             });
 
-            if (!res) {
+            if (!data) {
                 return response.errorResponse(res, 404, "Area does not exist");
             }
 

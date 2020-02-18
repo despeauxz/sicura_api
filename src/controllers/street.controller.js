@@ -24,7 +24,7 @@ class StreetReports {
                     rating,
                     areaId,
                     geolocation: JSON.stringify(value.data),
-                    report: JSON.stringify(report)
+                    report
                 }
             });
 
@@ -65,11 +65,11 @@ class StreetReports {
     static async remove(req, res) {
         try {
             const { id } = req.params;
-            const res = await StreetReport.findOne({
+            const data = await StreetReport.findOne({
                 where: { id }
             });
 
-            if (!res) {
+            if (!data) {
                 return response.errorResponse(
                     res,
                     404,

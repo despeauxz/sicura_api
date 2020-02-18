@@ -24,7 +24,7 @@ class StateReports {
                     rating,
                     capital,
                     geolocation: JSON.stringify(value.data),
-                    report: JSON.stringify(report)
+                    report
                 }
             });
 
@@ -101,11 +101,11 @@ class StateReports {
     static async remove(req, res) {
         try {
             const { id } = req.params;
-            const res = await StateReport.findOne({
+            const data = await StateReport.findOne({
                 where: { id }
             });
 
-            if (!res) {
+            if (!data) {
                 return response.errorResponse(res, 404, "State does not exist");
             }
 

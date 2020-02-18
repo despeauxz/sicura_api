@@ -24,7 +24,7 @@ class LGAReports {
                     rating,
                     stateId,
                     geolocation: JSON.stringify(value.data),
-                    report: JSON.stringify(report)
+                    report
                 }
             });
 
@@ -76,11 +76,11 @@ class LGAReports {
     static async remove(req, res) {
         try {
             const { id } = req.params;
-            const res = await LgaReport.findOne({
+            const data = await LgaReport.findOne({
                 where: { id }
             });
 
-            if (!res) {
+            if (!data) {
                 return response.errorResponse(res, 404, "LGA does not exist");
             }
 
