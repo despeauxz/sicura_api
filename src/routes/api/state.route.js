@@ -27,7 +27,7 @@ router.patch(
     Authorization.authorizeAdmin,
     stateValidation.update,
     validation,
-    StateReportController.updateStateReport
+    StateReportController.update
 );
 
 router.get("/state_reports", StateReportController.statesReport);

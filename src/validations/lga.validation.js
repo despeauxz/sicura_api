@@ -23,16 +23,6 @@ export default {
                     throw new Error("State does not exists");
                 }
             })),
-        check("report")
-            .trim()
-            .exists()
-            .withMessage("Report field is required")
-            .custom(value => notEmpty(value, "Report cannot be left blank")),
-        check("rating")
-            .trim()
-            .exists()
-            .withMessage("Rating field is required")
-            .custom(value => notEmpty(value, "Rating cannot be left blank")),
     ],
     update: [
         check("name")
@@ -40,11 +30,5 @@ export default {
             .exists()
             .withMessage("Name must be specific")
             .optional(),
-        check("report")
-            .trim()
-            .exists()
-            .optional()
-            .withMessage("Report field is required")
-            .custom(value => notEmpty(value, "Report cannot be left blank")),
     ]
 };

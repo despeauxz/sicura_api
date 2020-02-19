@@ -62,6 +62,44 @@ class StreetReports {
         }
     }
 
+    static async update(req, res) {
+        try {
+            const { id } = req.params;
+            const { name, areaId, report } = req.body;
+
+            const rep = await StreetReport.findOne({
+                where: { id }
+            });
+
+            if (!rep) {
+                return response.errorResponse(
+                    res,
+                    400,
+                    "Street does not exists"
+                );
+            }
+
+            const area = await AreaReport.findOne({
+                where: { id: areaId }
+            });
+            const areaName = area.dataValues.name;
+            const value = await axios.get(
+                `https://api.opencagedata.com/geocode/v1/json?q=${name} ${areaName}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
+            );
+
+            const data = await rep.update({
+                name: name || rep.name,
+                areaId: areaId || rep.areaId,
+                report: report || rep.report,
+                geolocation: JSON.stringify(value.data)
+            });
+
+            return response.successResponse(res, 200, data);
+        } catch (error) {
+            return response.errorResponse(res, 400, error);
+        }
+    }
+
     static async remove(req, res) {
         try {
             const { id } = req.params;

@@ -21,6 +21,15 @@ router.post(
     AreaReportController.create
 );
 
+router.patch(
+    "/area_reports/:id",
+    Authorization.authorize,
+    Authorization.authorizeAdmin,
+    AreaValidation.update,
+    validation,
+    AreaReportController.update
+);
+
 router.get("/area_reports", AreaReportController.reports);
 router.get("/area_street/:id", AreaReportController.AreaStreet);
 router.get("/area_reports/:id", AreaReportController.report);

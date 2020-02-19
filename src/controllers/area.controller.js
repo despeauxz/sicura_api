@@ -73,6 +73,41 @@ class AreaReports {
         }
     }
 
+    static async update(req, res) {
+        try {
+            const { id } = req.params;
+            const { name, lgaId, report } = req.body;
+
+            const rep = await AreaReport.findOne({
+                where: { id }
+            });
+
+            if (!rep) {
+                return response.errorResponse(res, 400, "Area does not exists");
+            }
+
+            const lga = await LgaReport.findOne({
+                where: { id: lgaId }
+            });
+            const lgaName = lga.dataValues.name;
+
+            const value = await axios.get(
+                `https://api.opencagedata.com/geocode/v1/json?q=${name} ${lgaName}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
+            );
+
+            const data = await rep.update({
+                name: name || rep.name,
+                lgaId: lgaId || rep.lgaId,
+                report: report || rep.report,
+                geolocation: JSON.stringify(value.data)
+            });
+
+            return response.successResponse(res, 200, data);
+        } catch (error) {
+            return response.errorResponse(res, 400, error);
+        }
+    }
+
     static async remove(req, res) {
         try {
             const { id } = req.params;

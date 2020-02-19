@@ -9,7 +9,7 @@ const { StateReport, LgaReport, AreaReport, StreetReport } = models;
 
 class StateReports {
     static async addState(req, res) {
-        const { name, capital, report, rating } = req.body;
+        const { name, capital } = req.body;
 
         try {
             const value = await axios.get(
@@ -21,10 +21,8 @@ class StateReports {
                 defaults: {
                     type: "state",
                     name,
-                    rating,
                     capital,
-                    geolocation: JSON.stringify(value.data),
-                    report
+                    geolocation: JSON.stringify(value.data)
                 }
             });
 
@@ -69,10 +67,10 @@ class StateReports {
         }
     }
 
-    static async updateStateReport(req, res) {
+    static async update(req, res) {
         try {
             const { id } = req.params;
-            const { name, capital, report } = req.body;
+            const { name, capital } = req.body;
 
             const rep = await StateReport.findOne({
                 where: { id }
@@ -86,13 +84,17 @@ class StateReports {
                 );
             }
 
-            const newReport = rep.update({
+            const value = await axios.get(
+                `https://api.opencagedata.com/geocode/v1/json?q=${name}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
+            );
+
+            const data = await rep.update({
                 name: name || rep.name,
                 capital: capital || rep.capital,
-                report: report || rep.report
+                geolocation: JSON.stringify(value.data)
             });
 
-            return response.successResponse(res, 200, newReport);
+            return response.successResponse(res, 200, data);
         } catch (error) {
             return response.errorResponse(res, 400, error);
         }

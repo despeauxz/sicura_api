@@ -21,14 +21,14 @@ router.post(
     StreetReportController.create
 );
 
-// router.patch(
-//     "/lga_reports/:id",
-//     Authorization.authorize,
-//     Authorization.authorizeAdmin,
-//     LGAValidation.update,
-//     validation,
-//     LGAReportController.updateStateReport
-// );
+router.patch(
+    "/street_reports/:id",
+    Authorization.authorize,
+    Authorization.authorizeAdmin,
+    StreetValidation.update,
+    validation,
+    StreetReportController.update
+);
 
 router.get("/street_reports", StreetReportController.reports);
 router.get("/street_reports/:id", StreetReportController.report);

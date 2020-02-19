@@ -32,6 +32,14 @@ apiRouter.post(
     validation,
     IncidenceController.create
 );
+apiRouter.delete(
+    "/incidences/:id",
+    Authorization.authorize,
+    Authorization.authorizeAdmin,
+    IncidenceValidation.update,
+    validation,
+    IncidenceController.update
+);
 apiRouter.get(
     "/incidences",
     Authorization.authorize,

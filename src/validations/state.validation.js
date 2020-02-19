@@ -19,16 +19,6 @@ export default {
             .exists()
             .withMessage("Capital must be specific")
             .custom(value => notEmpty(value, "Capital cannot be left blank")),
-        check("report")
-            .trim()
-            .exists()
-            .withMessage("Report field is required")
-            .custom(value => notEmpty(value, "Report cannot be left blank")),
-        check("rating")
-            .trim()
-            .exists()
-            .withMessage("Rating field is required")
-            .custom(value => notEmpty(value, "Rating cannot be left blank")),
     ],
     update: [
         check("name")
@@ -42,11 +32,5 @@ export default {
             .optional()
             .withMessage("Capital must be specific")
             .custom(value => notEmpty(value, "Capital cannot be left blank")),
-        check("report")
-            .trim()
-            .exists()
-            .optional()
-            .withMessage("Report field is required")
-            .custom(value => notEmpty(value, "Report cannot be left blank")),
     ]
 };

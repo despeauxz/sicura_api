@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             name: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                unique: true
+                allowNull: false
             },
             stateId: {
                 type: DataTypes.INTEGER,

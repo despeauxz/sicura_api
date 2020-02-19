@@ -20,19 +20,10 @@ module.exports = {
         },
         name: {
             type: Sequelize.STRING,
-            allowNull: false,
-            unique: true
-        },
-        report: {
-            type: Sequelize.TEXT,
             allowNull: false
         },
         geolocation: {
             type: Sequelize.TEXT,
-            allowNull: false
-        },
-        rating: {
-            type: Sequelize.FLOAT,
             allowNull: false
         },
         createdAt: {

@@ -21,14 +21,14 @@ router.post(
     LGAReportController.create
 );
 
-// router.patch(
-//     "/lga_reports/:id",
-//     Authorization.authorize,
-//     Authorization.authorizeAdmin,
-//     LGAValidation.update,
-//     validation,
-//     LGAReportController.updateStateReport
-// );
+router.patch(
+    "/lga_reports/:id",
+    Authorization.authorize,
+    Authorization.authorizeAdmin,
+    LGAValidation.update,
+    validation,
+    LGAReportController.update
+);
 
 router.get("/lga_reports", LGAReportController.reports);
 router.get("/lga_area/:id", LGAReportController.LgaArea);

@@ -43,13 +43,39 @@ class Incident {
         }
     }
 
+    static async update(req, res) {
+        try {
+            const { name, weight } = req.body;
+            const { id } = req.params;
+
+            const incidence = await IncidentTypes.findOne({
+                where: { id }
+            });
+            if (!incidence) {
+                return response.errorResponse(
+                    res,
+                    404,
+                    "Incident does not exist"
+                );
+            }
+
+            const data = await incidence.update({
+                name: name || incidence.name,
+                weight: weight || incidence.weight
+            });
+            return response.successResponse(res, 201, data);
+        } catch (error) {
+            return response.errorResponse(res, 400, error);
+        }
+    }
+
     static async remove(req, res) {
         try {
             const { id } = req.params;
-            const res = await IncidentTypes.findOne({
+            const resp = await IncidentTypes.findOne({
                 where: { id }
             });
-            if (!res) {
+            if (!resp) {
                 return response.errorResponse(
                     res,
                     404,
