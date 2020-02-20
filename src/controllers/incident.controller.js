@@ -24,7 +24,7 @@ class Incident {
             //         "Total values must be in range of 1"
             //     );
             // }
-            const incident = IncidentTypes.create({
+            const incident = await IncidentTypes.create({
                 name,
                 weight
             });
@@ -63,7 +63,7 @@ class Incident {
                 name: name || incidence.name,
                 weight: weight || incidence.weight
             });
-            return response.successResponse(res, 201, data);
+            return response.successResponse(res, 200, data);
         } catch (error) {
             return response.errorResponse(res, 400, error);
         }
@@ -79,7 +79,7 @@ class Incident {
                 return response.errorResponse(
                     res,
                     404,
-                    "Incident does not exist"
+                    "Incidence does not exist"
                 );
             }
 
@@ -89,7 +89,7 @@ class Incident {
             return response.messageResponse(
                 res,
                 200,
-                "Incident removed successfully"
+                "Incidence removed successfully"
             );
         } catch (error) {
             return response.errorResponse(res, 400, error);
