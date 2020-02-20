@@ -35,13 +35,13 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     AreaReport.associate = models => {
-        const { LgaReport, StreetRetport } = models;
+        const { LgaReport, StreetReport } = models;
 
         AreaReport.belongsTo(LgaReport, {
             foreignKey: "lgaId"
         });
 
-        AreaReport.hasMany(StreetRetport, {
+        AreaReport.hasMany(StreetReport, {
             foreignKey: "areaId",
             as: "streets"
         });
