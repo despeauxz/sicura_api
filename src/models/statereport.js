@@ -15,33 +15,15 @@ module.exports = (sequelize, DataTypes) => {
         geolocation: {
             type: DataTypes.TEXT,
             allowNull: false
-        },
-        report: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        rating: {
-            type: DataTypes.FLOAT,
-            allowNull: false
         }
     }, {});
 
     StateReport.associate = models => {
-        const { LgaReport, AreaReport, StreetReport } = models;
+        const { LgaReport } = models;
 
         StateReport.hasMany(LgaReport, {
             foreignKey: "stateId",
-            as: "lga"
-        });
-
-        StateReport.hasMany(AreaReport, {
-            foreignKey: "lgaId",
-            as: "areas"
-        });
-
-        StateReport.hasMany(StreetReport, {
-            foreignKey: "areaId",
-            as: "streets"
+            as: "lgas"
         });
     };
 

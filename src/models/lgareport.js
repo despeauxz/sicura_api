@@ -18,16 +18,8 @@ module.exports = (sequelize, DataTypes) => {
                     key: "id"
                 }
             },
-            report: {
-                type: DataTypes.TEXT,
-                allowNull: false
-            },
             geolocation: {
                 type: DataTypes.TEXT,
-                allowNull: false
-            },
-            rating: {
-                type: DataTypes.FLOAT,
                 allowNull: false
             }
         },
@@ -35,10 +27,15 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     LgaReport.associate = models => {
-        const { StateReport } = models;
+        const { StateReport, AreaReport } = models;
 
         LgaReport.belongsTo(StateReport, {
             foreignKey: "stateId"
+        });
+
+        LgaReport.hasMany(AreaReport, {
+            foreignKey: "lgaId",
+            as: "areas"
         });
     };
 
