@@ -79,19 +79,15 @@ class StreetReports {
                 );
             }
 
-            const area = await AreaReport.findOne({
-                where: { id: areaId }
-            });
-            const areaName = area.dataValues.name;
             const value = await axios.get(
-                `https://api.opencagedata.com/geocode/v1/json?q=${name} ${areaName}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
+                `https://api.opencagedata.com/geocode/v1/json?q=${name}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
             );
 
             const data = await rep.update({
                 name: name || rep.name,
                 areaId: areaId || rep.areaId,
                 report: report || rep.report,
-                geolocation: JSON.stringify(value.data)
+                geolocation: name ? JSON.stringify(value.data) : rep.geolocation
             });
 
             return response.successResponse(res, 200, data);

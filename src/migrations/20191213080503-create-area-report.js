@@ -32,7 +32,8 @@ module.exports = {
         },
         rating: {
             type: Sequelize.FLOAT,
-            allowNull: false
+            allowNull: true,
+            defaultValue: 100
         },
         createdAt: {
             allowNull: false,

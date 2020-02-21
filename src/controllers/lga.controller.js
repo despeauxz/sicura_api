@@ -84,18 +84,14 @@ class LGAReports {
                 return response.errorResponse(res, 400, "LGA does not exists");
             }
 
-            const state = await StateReport.findOne({
-                where: { id: stateId }
-            });
-            const stateName = state.dataValues.name;
             const value = await axios.get(
-                `https://api.opencagedata.com/geocode/v1/json?q=${name} ${stateName}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
+                `https://api.opencagedata.com/geocode/v1/json?q=${name} LGA, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
             );
 
             const data = await rep.update({
                 name: name || rep.name,
                 stateId: stateId || rep.stateId,
-                geolocation: JSON.stringify(value.data)
+                geolocation: name ? JSON.stringify(value.data) : rep.geolocation
             });
 
             return response.successResponse(res, 200, data);

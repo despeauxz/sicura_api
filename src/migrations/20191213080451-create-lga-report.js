@@ -22,6 +22,11 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: false
         },
+        rating: {
+            type: Sequelize.FLOAT,
+            allowNull: true,
+            defaultValue: 100
+        },
         geolocation: {
             type: Sequelize.TEXT,
             allowNull: false

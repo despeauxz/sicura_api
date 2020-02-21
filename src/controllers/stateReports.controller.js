@@ -91,7 +91,7 @@ class StateReports {
             const data = await rep.update({
                 name: name || rep.name,
                 capital: capital || rep.capital,
-                geolocation: JSON.stringify(value.data)
+                geolocation: name ? JSON.stringify(value.data) : rep.geolocation
             });
 
             return response.successResponse(res, 200, data);

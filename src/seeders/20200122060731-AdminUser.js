@@ -10,7 +10,7 @@ module.exports = {
             avatar: null,
             gender: "Male",
             admin: true,
-            password: "$2b$05$qqK.Q7/oePIW4SSllzuL4.smoVzGbECLMd5iep1fT6ncPyhCJMINC",
+            password: "$2b$05$RFJV7TNIeFOKDvDYiPFIaOXQEpZd7poHNjuj9FxDLXYuh2yMXlxQu",
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -24,7 +24,7 @@ module.exports = {
             avatar: null,
             gender: "Male",
             admin: true,
-            password: "$2b$05$qqK.Q7/oePIW4SSllzuL4.smoVzGbECLMd5iep1fT6ncPyhCJMINC",
+            password: "$2b$05$RFJV7TNIeFOKDvDYiPFIaOXQEpZd7poHNjuj9FxDLXYuh2yMXlxQu",
             createdAt: new Date(),
             updatedAt: new Date()
         }
