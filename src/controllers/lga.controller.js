@@ -6,7 +6,7 @@ const { LgaReport, AreaReport, StateReport } = models;
 
 class LGAReports {
     static async create(req, res) {
-        const { name, stateId } = req.body;
+        const { name, report, stateId } = req.body;
 
         try {
             const state = await StateReport.findOne({
@@ -21,6 +21,7 @@ class LGAReports {
                 defaults: {
                     type: "lga",
                     name,
+                    report,
                     stateId,
                     geolocation: JSON.stringify(value.data)
                 }
@@ -74,7 +75,7 @@ class LGAReports {
     static async update(req, res) {
         try {
             const { id } = req.params;
-            const { name, stateId } = req.body;
+            const { name, report, rating, stateId } = req.body;
 
             const rep = await LgaReport.findOne({
                 where: { id }
@@ -90,6 +91,8 @@ class LGAReports {
 
             const data = await rep.update({
                 name: name || rep.name,
+                report: report || rep.report,
+                rating,
                 stateId: stateId || rep.stateId,
                 geolocation: name ? JSON.stringify(value.data) : rep.geolocation
             });

@@ -22,6 +22,10 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: false
         },
+        report: {
+            type: Sequelize.TEXT,
+            allowNull: false
+        },
         rating: {
             type: Sequelize.FLOAT,
             allowNull: true,

@@ -9,7 +9,7 @@ const { StateReport, LgaReport, AreaReport, StreetReport } = models;
 
 class StateReports {
     static async addState(req, res) {
-        const { name, capital } = req.body;
+        const { name, capital, report } = req.body;
 
         try {
             const value = await axios.get(
@@ -22,6 +22,7 @@ class StateReports {
                     type: "state",
                     name,
                     capital,
+                    report,
                     geolocation: JSON.stringify(value.data)
                 }
             });
@@ -70,7 +71,7 @@ class StateReports {
     static async update(req, res) {
         try {
             const { id } = req.params;
-            const { name, capital } = req.body;
+            const { name, capital, report, rating } = req.body;
 
             const rep = await StateReport.findOne({
                 where: { id }
@@ -91,6 +92,8 @@ class StateReports {
             const data = await rep.update({
                 name: name || rep.name,
                 capital: capital || rep.capital,
+                report,
+                rating,
                 geolocation: name ? JSON.stringify(value.data) : rep.geolocation
             });
 
