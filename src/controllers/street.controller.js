@@ -65,7 +65,7 @@ class StreetReports {
     static async update(req, res) {
         try {
             const { id } = req.params;
-            const { name, areaId, report } = req.body;
+            const { name, areaId, report, rating } = req.body;
 
             const rep = await StreetReport.findOne({
                 where: { id }
@@ -87,7 +87,10 @@ class StreetReports {
                 name: name || rep.name,
                 areaId: areaId || rep.areaId,
                 report: report || rep.report,
-                geolocation: name ? JSON.stringify(value.data) : rep.geolocation
+                geolocation: name
+                    ? JSON.stringify(value.data)
+                    : rep.geolocation,
+                rating
             });
 
             return response.successResponse(res, 200, data);
