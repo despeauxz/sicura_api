@@ -1,3 +1,0 @@
-state_name,state_capital,lga_name,state_id,area_name,lga_id,street_name,area_id,reports
-Kogi State,Lokoja,Okene,1,Okene,1,Lafia Street Okene, 1,"{murder: 10, kidnap: 20, armed_robbery: 10}"
-Edo State,Benin-city,Oredo,2,Orogo,2,Aviala, 2,"{murder: 10, kidnap: 20, armed_robbery: 10}"
