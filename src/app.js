@@ -34,18 +34,6 @@ app.use(
     })
 );
 
-// app.use(passport.initialize());
-// passport.serializeUser((user, done) => {
-//     done(null, user);
-// });
-
-// passport.deserializeUser((obj, done) => {
-//     done(null, obj);
-// });
-
-// passport.use("facebook", facebookStrategy);
-// passport.use("google", googleStrategy);
-
 app.use(
     session({
         secret: process.env.SECRET_KEY,

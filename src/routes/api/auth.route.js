@@ -15,6 +15,7 @@ router.post("/activate_user", UserController.verifyAccount);
 router.post("/verify_account", UserController.sendMailToVerifyAccount);
 
 // router.post("/logout", UserController.logout);
+
 router.post("/forgot_password", authValidation.forgotPassword, validation, UserController.forgotPassword);
 router.post("/reset_password", authValidation.resetPassword, validation, UserController.resetPassword);
 

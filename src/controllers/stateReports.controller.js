@@ -85,16 +85,11 @@ class StateReports {
                 );
             }
 
-            const value = await axios.get(
-                `https://api.opencagedata.com/geocode/v1/json?q=${name}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
-            );
-
             const data = await rep.update({
                 name: name || rep.name,
                 capital: capital || rep.capital,
                 report,
-                rating,
-                geolocation: name ? JSON.stringify(value.data) : rep.geolocation
+                rating
             });
 
             return response.successResponse(res, 200, data);

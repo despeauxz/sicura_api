@@ -1,3 +1,5 @@
+import axios from "axios";
+
 module.exports = (sequelize, DataTypes) => {
     const AreaReport = sequelize.define(
         "AreaReport",
@@ -8,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
             },
             name: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true
             },
             lgaId: {
                 type: DataTypes.INTEGER,
@@ -30,9 +33,30 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.FLOAT,
                 allowNull: true,
                 defaultValue: 100
-            },
+            }
         },
-        {}
+        {
+            hooks: {
+                beforeCreate: async area => {
+                    const value = await axios.get(
+                        `https://api.opencagedata.com/geocode/v1/json?q=${area.dataValues.name}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
+                    );
+                    await area.setDataValue(
+                        "geolocation",
+                        JSON.stringify(value.data)
+                    );
+                },
+                beforeUpdate: async area => {
+                    const value = await axios.get(
+                        `https://api.opencagedata.com/geocode/v1/json?q=${area.dataValues.name}, Nigeria&key=b7921c262e3b446eb56391139d4812f9&language=en&pretty=1`
+                    );
+                    await area.setDataValue(
+                        "geolocation",
+                        JSON.stringify(value.data)
+                    );
+                }
+            }
+        }
     );
 
     AreaReport.associate = models => {
